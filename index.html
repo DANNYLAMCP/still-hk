@@ -1,39 +1,223 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Still · Hung Hom</title>
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Noto+Sans+TC:wght@300;400;500;600&display=swap" rel="stylesheet" />
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-tailwind.config={theme:{extend:{colors:{ivory:'#f5f1e8','deep-ink':'#1c2522','soft-ink':'#3b4a45',accent:'#c2a168'},fontFamily:{display:['"Cormorant Garamond"','serif'],sans:['"Noto Sans TC"','sans-serif']}}}};
-</script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Noto+Sans+TC:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-body{font-family:'Noto Sans TC',sans-serif;background-color:#f5f1e8;color:#3b4a45;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Noto Sans TC',sans-serif;background:#f5f1e8;color:#3b4a45;line-height:1.6;}
 html{scroll-behavior:smooth;}
-::selection{background:#c2a16833;}
+header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(245,241,232,0.95);backdrop-filter:blur(10px);transition:all 0.3s;}
+header.scrolled{box-shadow:0 2px 10px rgba(0,0,0,0.05);}
+nav{max-width:1200px;margin:0 auto;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;}
+nav .logo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;letter-spacing:0.3em;color:#1c2522;text-decoration:none;}
+nav .menu{display:flex;gap:2rem;list-style:none;}
+nav .menu a{text-decoration:none;font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;color:#3b4a45;transition:color 0.3s;}
+nav .menu a:hover{color:#1c2522;}
+section{padding:5rem 2rem;max-width:1200px;margin:0 auto;}
+#home{min-height:100vh;display:flex;align-items:center;padding-top:8rem;}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
+.hero-text h1{font-family:'Cormorant Garamond',serif;font-size:3.5rem;letter-spacing:0.15em;color:#1c2522;margin-bottom:1rem;}
+.hero-text .subtitle{font-size:0.85rem;letter-spacing:0.3em;text-transform:uppercase;color:#3b4a45;opacity:0.7;margin-bottom:0.5rem;}
+.hero-text .cuisine{font-size:0.75rem;letter-spacing:0.25em;text-transform:uppercase;color:#3b4a45;opacity:0.6;margin-bottom:1.5rem;}
+.hero-text p{max-width:500px;margin-bottom:2rem;}
+.cta-group{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn{display:inline-block;padding:0.75rem 1.5rem;border-radius:50px;text-decoration:none;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;transition:all 0.3s;}
+.btn-primary{background:#1c2522;color:#f5f1e8;}
+.btn-secondary{border:1px solid rgba(59,74,69,0.3);color:#3b4a45;}
+.btn:hover{transform:translateY(-2px);box-shadow:0 4px 15px rgba(0,0,0,0.1);}
+.hero-img{height:500px;border-radius:30px;overflow:hidden;position:relative;background:url('https://images.pexels.com/photos/3217151/pexels-photo-3217151.jpeg?auto=compress&cs=tinysrgb&w=1200') center/cover;box-shadow:0 20px 50px rgba(0,0,0,0.2);}
+.hero-img::before{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(21,27,25,0.85),rgba(21,27,25,0.4),transparent);}
+.hero-caption{position:absolute;bottom:2rem;left:2rem;right:2rem;color:#f5f1e8;z-index:1;}
+.hero-caption .tag{font-size:0.7rem;letter-spacing:0.25em;text-transform:uppercase;margin-bottom:0.5rem;}
+.hero-caption p{font-size:0.85rem;opacity:0.9;}
+.section-header{margin-bottom:2rem;}
+.section-header .eyebrow{font-size:0.7rem;letter-spacing:0.35em;text-transform:uppercase;color:#3b4a45;opacity:0.6;margin-bottom:0.5rem;}
+.section-header h2{font-family:'Cormorant Garamond',serif;font-size:2.5rem;letter-spacing:0.2em;color:#1c2522;}
+.content{max-width:900px;}
+.content p{margin-bottom:1.5rem;}
+.menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2rem;}
+.menu-item h3{font-family:'Cormorant Garamond',serif;font-size:1.2rem;letter-spacing:0.15em;color:#1c2522;margin-bottom:0.5rem;}
+.menu-item p{font-size:0.9rem;color:#3b4a45;opacity:0.9;}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem;}
+.gallery-item{aspect-ratio:4/5;border-radius:20px;overflow:hidden;position:relative;}
+.gallery-item img{width:100%;height:100%;object-fit:cover;}
+.gallery-item::before{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(21,27,25,0.8),transparent);}
+.gallery-caption{position:absolute;bottom:1rem;left:1rem;right:1rem;color:#f5f1e8;font-size:0.75rem;z-index:1;}
+.visit-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:3rem;}
+.contact-item{display:flex;gap:1rem;align-items:start;margin-bottom:1.5rem;}
+.contact-item .icon{font-size:1.2rem;width:30px;}
+.contact-item .label{font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:#3b4a45;opacity:0.6;}
+.contact-item a{color:#3b4a45;text-decoration:none;transition:color 0.3s;}
+.contact-item a:hover{color:#1c2522;}
+footer{border-top:1px solid rgba(255,255,255,0.3);padding:2rem;text-align:center;}
+footer p{font-size:0.8rem;color:#3b4a45;opacity:0.7;}
+@media(max-width:768px){
+.hero-grid,.menu-grid,.gallery-grid,.visit-grid{grid-template-columns:1fr;}
+nav .menu{display:none;}
+.hero-text h1{font-size:2.5rem;}
+}
 </style>
-<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
-<body class="antialiased">
-<div id="root"></div>
-<script type="text/babel">
-const CONTACT={phone:'9313 5651',phoneHref:'tel:+85293135651',wa:'85293135651',ig:'https://www.instagram.com/still.hk_/',maps:'https://maps.app.goo.gl/tfxU1XKpP5DMBkkc6',address:'紅磡馬頭圍道63號啟岸1樆06號舖',hours:'每日 11:30 – 22:00'};
-const Navbar=()=>{const[s,setS]=React.useState(false);React.useEffect(()=>{const f=()=>setS(window.scrollY>10);window.addEventListener('scroll',f);return()=>window.removeEventListener('scroll',f)},[]);return React.createElement('header',{className:`fixed top-0 inset-x-0 z-30 transition-all duration-300 ${s?'bg-[#f5f1e8]/95 backdrop-blur shadow-sm':'bg-[#f5f1e8]/70 backdrop-blur'}`},React.createElement('nav',{className:'max-w-5xl mx-auto px-6 py-4 flex items-center justify-between'},React.createElement('a',{href:'#home',className:'font-["Cormorant_Garamond"] text-lg tracking-[0.28em] text-[#1c2522]'},'STILL'),React.createElement('div',{className:'hidden md:flex items-center gap-8 text-xs tracking-[0.22em] text-[#3b4a45]/80 uppercase'},[['home','Home'],['about','About'],['menu','Menu'],['gallery','Gallery'],['visit','Visit']].map(([id,label])=>React.createElement('a',{key:id,href:`#${id}`,className:'hover:text-[#1c2522]'},label)))))};
-const Hero=()=>React.createElement('section',{id:'home',className:'min-h-screen flex items-center bg-[#f5f1e8]'},React.createElement('div',{className:'max-w-5xl mx-auto px-6 pt-28 pb-16 grid md:grid-cols-2 gap-10 items-center'},React.createElement('div',{className:'space-y-6'},[React.createElement('p',{key:'e',className:'text-xs tracking-[0.32em] uppercase text-[#3b4a45]/60'},'紅磡 · 啟岸 The Vantage'),React.createElement('h1',{key:'h',className:'text-4xl md:text-5xl leading-tight tracking-[0.12em] text-[#1c2522] font-serif'},'Still'),React.createElement('p',{key:'c',className:'text-sm tracking-[0.24em] uppercase text-[#3b4a45]/70'},'西班牙 Tapas · 葡萄酒餐酒館'),React.createElement('p',{key:'d',className:'text-[0.98rem] leading-relaxed text-[#3b4a45]/90 max-w-md'},'Still 是一間隱身紅磡啟岸的西班牙餐酒館，以 tapas、海鮮飯與 wine pairing 為靈感，營造輕聲對話的夜晚。'),React.createElement('div',{key:'btns',className:'flex flex-wrap items-center gap-3 pt-2'},[React.createElement('a',{key:'wa',href:`https://wa.me/${CONTACT.wa}`,target:'_blank',rel:'noreferrer',className:'inline-flex items-center gap-2 rounded-full bg-[#1c2522] text-[#f5f1e8] px-5 py-2.5 text-xs tracking-[0.2em] uppercase'},`WhatsApp 訂位 · ${CONTACT.phone}`),React.createElement('a',{key:'ig',href:CONTACT.ig,target:'_blank',rel:'noreferrer',className:'inline-flex items-center gap-2 rounded-full border border-[#3b4a45]/30 px-4 py-2 text-xs tracking-[0.18em] uppercase text-[#3b4a45]/80'},'Instagram @still.hk_')])])),React.createElement('div',{className:'md:h-[420px]'},React.createElement('div',{className:'relative h-full rounded-3xl overflow-hidden bg-cover bg-center shadow-lg',style:{backgroundImage:'url(https://images.pexels.com/photos/3217151/pexels-photo-3217151.jpeg?auto=compress&cs=tinysrgb&w=1200)'}},React.createElement('div',{className:'absolute inset-0',style:{background:'linear-gradient(to top, rgba(21,27,25,0.85), rgba(21,27,25,0.45), transparent)'}}),Math.random()&&React.createElement('div',{className:'absolute bottom-7 left-7 right-7 text-[#f5f1e8]'},[React.createElement('p',{key:'l',className:'text-xs tracking-[0.24em] uppercase mb-2'},'A Quiet Evening in Hung Hom'),React.createElement('p',{key:'t',className:'text-sm leading-relaxed text-[#f5f1e8]/90'},'木紋吧桌、長凳與柔和吹燈，把一杯 Sangria 的時間拉長成一個夜晚。')]))))));
-const Sec=({id,ey,title,children})=>React.createElement('section',{id,className:'scroll-mt-24 border-t border-white/40'},React.createElement('div',{className:'max-w-5xl mx-auto px-6 lg:px-10 py-14 space-y-6 text-[0.95rem] leading-relaxed'},[ey&&React.createElement('p',{key:'e',className:'text-xs tracking-[0.32em] uppercase text-[#3b4a45]/60'},ey),title&&React.createElement('h2',{key:'t',className:'font-serif text-3xl tracking-[0.16em] text-[#1c2522]'},title),children]));
-const About=()=>React.createElement(Sec,{id:'about',ey:'About',title:'靜下來，好好吃一口'},[React.createElement('p',{key:'1'},'空間以木質與暖橙色調為主，開放式吧台連接室內外座位，日光灑入時像咊啟店，入夜後則成為節奏放慢的 wine bar。'),React.createElement('p',{key:'2'},'我們把西班牙料理的煙燻香氣、海鮮鮮味與小食文化帶進紅磡街區，適合隨意喝一杯，也適合慢慢分享一整桌 tapas 與海鮮飯。')]);
-const menuItems=[{name:'香煎慢煮八爪魚 · Grilled Octopus',desc:'慢煮至軟崩的八爪魚，煎至微焦香，配合帶酸度的醬汁，平衡海水與炭香。'},{name:'西班牙蒜片蝦 · Gambas al Ajillo',desc:'蒜香橄殖油在小锅中還在微微冒泡，蝦肉爽口，適合用麵包抹走最後一滴油。'},{name:'牛面馥过號小漢堡 · Beef Cheek Slider',desc:'慢煮牛面馥帶著濃厚肉香與膠質，夾在小麵包之間，一嘱入口剛剛好。'},{name:'墨汁鮑魚海鮮飯 · Squid Ink Paella',desc:'墨汁裡藏著海鮮香氣，米粒帶和口，配上鮑魚與海鮮，適合慢慢分食。'},{name:'焦糖蘋果金寶 · Apple Crumble',desc:'酥脆金寶與溫熱蘋果、冰凍雲呢拿雪糕相疊，收結整個餐期的溫度與甜度。'},{name:'Red Sangria & 特調',desc:'以紅酒、新鮮水果與香料調成的 Sangria，酒感輕盈；另有無酒精特飲與咊啊選擇。'}];
-const Menu=()=>React.createElement(Sec,{id:'menu',ey:'Menu',title:'西班牙靈感小餐桌'},[React.createElement('p',{key:'i'},'菜單以 tapas 為主角，從香煎八爪魚到墨汁鮑魚海鮮飯，配合 Sangria 或自然酒，完成一個剛剛好的夜晚。'),React.createElement('div',{key:'grid',className:'grid md:grid-cols-2 gap-6 pt-2'},menuItems.map((m,i)=>React.createElement('div',{key:i},[React.createElement('h3',{key:'n',className:'font-serif text-lg tracking-[0.12em] text-[#1c2522]'},m.name),React.createElement('p',{key:'d',className:'text-sm text-[#3b4a45]/90'},m.desc)])))]);
-const Gallery=()=>React.createElement(Sec,{id:'gallery',ey:'Gallery',title:'片刻留白的光影'},[React.createElement('p',{key:'t'},'早午日光與咊啊香；入夜後吧台燈帶亮起，木椅與大理石桌面映出微微酒光。'),React.createElement('div',{key:'g',className:'grid md:grid-cols-3 gap-4 pt-2'},[['https://images.pexels.com/photos/4099238/pexels-photo-4099238.jpeg','吧台與高腳椅'],['https://images.pexels.com/photos/3731474/pexels-photo-3731474.jpeg','Tapas 與海鮮飯特写'],['https://images.pexels.com/photos/4353627/pexels-photo-4353627.jpeg','夜晚室外座位']].map(([u,c],i)=>React.createElement('div',{key:i,className:'aspect-[4/5] rounded-2xl overflow-hidden bg-cover bg-center relative',style:{backgroundImage:`url(${u}?auto=compress&cs=tinysrgb&w=800)`}},[React.createElement('div',{key:'ov',className:'absolute inset-0',style:{background:'linear-gradient(to top, rgba(21,27,25,0.8), transparent)'}}),React.createElement('div',{key:'cap',className:'absolute bottom-4 left-4 right-4 text-[0.75rem] text-[#f5f1e8]/90'},c)])))]);
-const Visit=()=>React.createElement(Sec,{id:'visit',ey:'Visit',title:'來到紅磡，找到 Still'},[React.createElement('div',{key:'grid',className:'grid lg:grid-cols-2 gap-10'},[React.createElement('div',{key:'info',className:'space-y-4'},[React.createElement('p',{key:'d'},`地址：${CONTACT.address}`),React.createElement('p',{key:'h'},`營業時間：${CONTACT.hours}`),React.createElement('a',{key:'map',href:CONTACT.maps,target:'_blank',rel:'noreferrer',className:'inline-flex items-center gap-2 rounded-full border border-[#3b4a45]/40 px-4 py-2 text-xs tracking-[0.18em] uppercase text-[#3b4a45]/90'},'在 Google 地圖中查看路線')]),React.createElement('div',{key:'contact',className:'space-y-3'},[['tel',CONTACT.phoneHref,CONTACT.phone,'Phone'],['✓',`https://wa.me/${CONTACT.wa}`,`+852 ${CONTACT.phone}`,'WhatsApp'],['@',CONTACT.ig,'@still.hk_','Instagram']].map(([icon,href,label,type])=>React.createElement('a',{key:type,href,target:'_blank',rel:'noreferrer',className:'flex items-center gap-3 group'},[React.createElement('span',{key:'i',className:'text-base w-5'},icon),React.createElement('div',{key:'d'},[React.createElement('p',{key:'t',className:'text-xs text-[#3b4a45]/60 uppercase tracking-[0.16em]'},type),React.createElement('p',{key:'l',className:'text-sm group-hover:text-[#1c2522]'},label)])]))))])]);
-const Footer=()=>React.createElement('footer',{className:'border-t border-white/40'},React.createElement('div',{className:'max-w-5xl mx-auto px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-3 text-[0.8rem] text-[#3b4a45]/70'},[React.createElement('p',{key:'c'},`© ${new Date().getFullYear()} Still · Hung Hom`),React.createElement('p',{key:'t',className:'tracking-[0.16em] uppercase'},'Tapas · Wine · Conversation')]));
-const App=()=>React.createElement('div',{className:'bg-[#f5f1e8] text-[#3b4a45]'},[React.createElement(Navbar,{key:'nav'}),React.createElement('main',{key:'main'},[React.createElement(Hero,{key:'h'}),React.createElement(About,{key:'a'}),React.createElement(Menu,{key:'m'}),React.createElement(Gallery,{key:'g'}),React.createElement(Visit,{key:'v'})]),React.createElement(Footer,{key:'f'})]);
-const root=ReactDOM.createRoot(document.getElementById('root'));
-root.render(React.createElement(App));
+<body>
+<header id="header">
+<nav>
+<a href="#home" class="logo">STILL</a>
+<ul class="menu">
+<li><a href="#home">Home</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#menu">Menu</a></li>
+<li><a href="#gallery">Gallery</a></li>
+<li><a href="#visit">Visit</a></li>
+</ul>
+</nav>
+</header>
+
+<section id="home">
+<div class="hero-grid">
+<div class="hero-text">
+<p class="subtitle">紅磡 · 啟岸 THE VANTAGE</p>
+<h1>Still</h1>
+<p class="cuisine">西班牙 TAPAS · 葡萄酒餐酒館</p>
+<p>Still 是一間隱身紅磡啟岸的西班牙餐酒館，以 tapas、海鮮飯與 wine pairing 為靈感，營造輕聲對話的夜晚。</p>
+<div class="cta-group">
+<a href="https://wa.me/85293135651" target="_blank" class="btn btn-primary">WHATSAPP 訂位 · 9313 5651</a>
+<a href="https://www.instagram.com/still.hk_/" target="_blank" class="btn btn-secondary">INSTAGRAM @still.hk_</a>
+</div>
+</div>
+<div class="hero-img">
+<div class="hero-caption">
+<p class="tag">A Quiet Evening in Hung Hom</p>
+<p>木紋吧桌、長凳與柔和吉燈，把一杯 Sangria 的時間拉長成一個夜晚。</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="about">
+<div class="section-header">
+<p class="eyebrow">ABOUT</p>
+<h2>靜下來，好好吃一口</h2>
+</div>
+<div class="content">
+<p>空間以木質與暖橙色調為主，開放式吧台連接室內外座位，日光灑入時像咊啟店，入夜後則成為節奏放慢的 wine bar。</p>
+<p>我們把西班牙料理的煙燻香氣、海鮮鮮味與小食文化帶進紅磡街區，適合隨意喝一杯，也適合慢慢分享一整桌 tapas 與海鮮飯。</p>
+</div>
+</section>
+
+<section id="menu">
+<div class="section-header">
+<p class="eyebrow">MENU</p>
+<h2>西班牙靈感小餐桌</h2>
+</div>
+<div class="content">
+<p>菜單以 tapas 為主角，從香煎八爪魚到墨汁鮑魚海鮮飯，配合 Sangria 或自然酒，完成一個剛剛好的夜晚。</p>
+</div>
+<div class="menu-grid">
+<div class="menu-item">
+<h3>香煎慢煮八爪魚 · Grilled Octopus</h3>
+<p>慢煮至軟崩的八爪魚，煎至微焦香，配合帶酸度的醬汁，平衡海水與炭香。</p>
+</div>
+<div class="menu-item">
+<h3>西班牙蒜片蝦 · Gambas al Ajillo</h3>
+<p>蒜香橄欖油在小锅中還在微微冒泡，蝦肉爽口，適合用麵包抹走最後一滴油。</p>
+</div>
+<div class="menu-item">
+<h3>牛面馥迷你漢堡 · Beef Cheek Slider</h3>
+<p>慢煮牛面馥帶著濃厚肉香與膠質，夾在小麵包之間，一嘱入口剛剛好。</p>
+</div>
+<div class="menu-item">
+<h3>墨汁鮑魚海鮮飯 · Squid Ink Paella</h3>
+<p>墨汁裡藏著海鮮香氣，米粒帶和口，配上鮑魚與海鮮，適合慢慢分食。</p>
+</div>
+<div class="menu-item">
+<h3>焦糖蘋果金寶 · Apple Crumble</h3>
+<p>酥脆金寶與溫熱蘋果、冰凍雲呢拿雪糕相疊，收結整個餐期的溫度與甜度。</p>
+</div>
+<div class="menu-item">
+<h3>Red Sangria & 特調</h3>
+<p>以紅酒、新鮮水果與香料調成的 Sangria，酒感輕盈；另有無酒精特飲與咊啊選擇。</p>
+</div>
+</div>
+</section>
+
+<section id="gallery">
+<div class="section-header">
+<p class="eyebrow">GALLERY</p>
+<h2>片刻留白的光影</h2>
+</div>
+<div class="content">
+<p>早午日光與咊啊香；入夜後吧台燈帶亮起，木椅與大理石桌面映出微微酒光。</p>
+</div>
+<div class="gallery-grid">
+<div class="gallery-item" style="background:url('https://images.pexels.com/photos/4099238/pexels-photo-4099238.jpeg?auto=compress&cs=tinysrgb&w=800') center/cover;">
+<p class="gallery-caption">吧台與高腳椅</p>
+</div>
+<div class="gallery-item" style="background:url('https://images.pexels.com/photos/3731474/pexels-photo-3731474.jpeg?auto=compress&cs=tinysrgb&w=800') center/cover;">
+<p class="gallery-caption">Tapas 與海鮮飯特寫</p>
+</div>
+<div class="gallery-item" style="background:url('https://images.pexels.com/photos/4353627/pexels-photo-4353627.jpeg?auto=compress&cs=tinysrgb&w=800') center/cover;">
+<p class="gallery-caption">夜晚室外座位</p>
+</div>
+</div>
+</section>
+
+<section id="visit">
+<div class="section-header">
+<p class="eyebrow">VISIT</p>
+<h2>來到紅磡，找到 Still</h2>
+</div>
+<div class="visit-grid">
+<div>
+<div class="content">
+<p><strong>地址：</strong>紅磡馬頭圍道63號啟岸1樆06號舖</p>
+<p><strong>營業時間：</strong>每日 11:30 – 22:00</p>
+<p style="margin-top:1.5rem;"><a href="https://maps.app.goo.gl/tfxU1XKpP5DMBkkc6" target="_blank" class="btn btn-secondary">在 GOOGLE 地圖中查看路線</a></p>
+</div>
+</div>
+<div>
+<div class="contact-item">
+<span class="icon">☎︎</span>
+<div>
+<p class="label">PHONE</p>
+<a href="tel:+85293135651">9313 5651</a>
+</div>
+</div>
+<div class="contact-item">
+<span class="icon">✓</span>
+<div>
+<p class="label">WHATSAPP</p>
+<a href="https://wa.me/85293135651" target="_blank">+852 9313 5651</a>
+</div>
+</div>
+<div class="contact-item">
+<span class="icon">@</span>
+<div>
+<p class="label">INSTAGRAM</p>
+<a href="https://www.instagram.com/still.hk_/" target="_blank">@still.hk_</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<footer>
+<p>&copy; 2026 Still · Hung Hom</p>
+<p style="margin-top:0.5rem;letter-spacing:0.2em;text-transform:uppercase;">Tapas · Wine · Conversation</p>
+</footer>
+
+<script>
+window.addEventListener('scroll',function(){
+const header=document.getElementById('header');
+if(window.scrollY>50){
+header.classList.add('scrolled');
+}else{
+header.classList.remove('scrolled');
+}
+});
 </script>
+
 </body>
 </html>
